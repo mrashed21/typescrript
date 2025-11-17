@@ -77,3 +77,25 @@ const users = [
 ];
 
 console.log(filterActiveUsers(users));
+
+interface Book {
+  title: string;
+  author: string;
+  publishedYear: number;
+  isAvailable: boolean;
+}
+
+function printBookDetails(value: Book) {
+  const isAvailableStatus = value.isAvailable ? "Yes" : "No";
+  console.log(
+    `Title: ${value.title}, Author: ${value.author}, Published: ${value.publishedYear}, Available: ${isAvailableStatus}`
+  );
+}
+const myBook: Book = {
+  title: "The Great Gatsby",
+  author: "F. Scott Fitzgerald",
+  publishedYear: 1925,
+  isAvailable: false,
+};
+
+printBookDetails(myBook);
