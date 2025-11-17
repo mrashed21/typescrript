@@ -8,10 +8,6 @@ const formatValue = (value: string | number | boolean) => {
   }
 };
 
-console.log(formatValue("hello"));
-console.log(formatValue(5));
-console.log(formatValue(true));
-
 const getLength = (value: string | Array<number>) => {
   if (typeof value === "string") {
     return value.length;
@@ -20,9 +16,6 @@ const getLength = (value: string | Array<number>) => {
     return value.length;
   }
 };
-
-console.log(getLength("typescript"));
-console.log(getLength([10, 20, 30, 40]));
 
 class Person {
   name: string;
@@ -37,12 +30,6 @@ class Person {
   }
 }
 
-const person1 = new Person("John Doe", 30);
-console.log(person1.getDetails());
-
-const person2 = new Person("Alice", 25);
-console.log(person2.getDetails());
-
 interface FilterRating {
   title: string;
   rating: number;
@@ -51,14 +38,6 @@ interface FilterRating {
 const filterByRating = (books: Array<FilterRating>): Array<FilterRating> => {
   return books.filter((book) => book.rating > 4);
 };
-
-const books = [
-  { title: "Book A", rating: 4.5 },
-  { title: "Book B", rating: 3.2 },
-  { title: "Book C", rating: 5.0 },
-];
-
-console.log(filterByRating(books));
 
 type User = {
   id: number;
@@ -70,13 +49,6 @@ type User = {
 const filterActiveUsers = (value: Array<User>): Array<User> => {
   return value.filter((val) => val.isActive === true);
 };
-const users = [
-  { id: 1, name: "Rakib", email: "rakib@example.com", isActive: true },
-  { id: 2, name: "Asha", email: "asha@example.com", isActive: false },
-  { id: 3, name: "Rumi", email: "rumi@example.com", isActive: true },
-];
-
-console.log(filterActiveUsers(users));
 
 interface Book {
   title: string;
@@ -91,11 +63,56 @@ const printBookDetails = (value: Book) => {
     `Title: ${value.title}, Author: ${value.author}, Published: ${value.publishedYear}, Available: ${isAvailableStatus}`
   );
 };
-const myBook: Book = {
-  title: "The Great Gatsby",
-  author: "F. Scott Fitzgerald",
-  publishedYear: 1925,
-  isAvailable: false,
+
+const getUniqueValues = (
+  arr1: (string | number)[],
+  arr2: (string | number)[]
+): (string | number)[] => {
+  const result: (string | number)[] = [];
+
+  const dublicateValue = (value: string | number): boolean => {
+    for (let i = 0; i < result.length; i++) {
+      if (result[i] === value) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (!dublicateValue(arr1[i])) {
+      result[result.length] = arr1[i];
+    }
+  }
+
+  for (let i = 0; i < arr2.length; i++) {
+    if (!dublicateValue(arr2[i])) {
+      result[result.length] = arr2[i];
+    }
+  }
+  return result;
 };
 
-printBookDetails(myBook);
+interface Product {
+  name: string;
+  price: number;
+  quantity: number;
+  discount?: number;
+}
+
+const calculateTotalPrice = (products: Product[]): number => {
+  return products.reduce((total, product) => {
+    const baseTotal = product.price * product.quantity;
+
+    let finalPrice;
+
+    if (product.discount !== undefined) {
+      const discountAmount = (baseTotal * product.discount) / 100;
+      finalPrice = baseTotal - discountAmount;
+    } else {
+      finalPrice = baseTotal;
+    }
+
+    return total + finalPrice;
+  }, 0);
+};
