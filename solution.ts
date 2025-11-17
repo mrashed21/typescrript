@@ -85,12 +85,12 @@ interface Book {
   isAvailable: boolean;
 }
 
-function printBookDetails(value: Book) {
+const printBookDetails = (value: Book) => {
   const isAvailableStatus = value.isAvailable ? "Yes" : "No";
   console.log(
     `Title: ${value.title}, Author: ${value.author}, Published: ${value.publishedYear}, Available: ${isAvailableStatus}`
   );
-}
+};
 const myBook: Book = {
   title: "The Great Gatsby",
   author: "F. Scott Fitzgerald",
